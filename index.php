@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>考试系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,9 +35,9 @@
         <form class="form-signin" action="admin.php" method="post" onSubmit="return InputCheck(this)">
         <h2 class="form-signin-heading">请登录</h2>
         <label for="inputEmail" class="sr-only">账号</label>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="text" name="inputEmail" id="inputEmail" class="form-control" placeholder="账号" required autofocus>
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 保存

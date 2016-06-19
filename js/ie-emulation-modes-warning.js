@@ -13,12 +13,12 @@
   'use strict';
 
   function emulatedIEMajorVersion() {
-    var groups = /MSIE ([0-9.]+)/.exec(window.navigator.userAgent)
+    var groups = /MSIE ([0-9.]+)/.exec(window.navigator.userAgent)//获取浏览器的版本
     if (groups === null) {
       return null
     }
-    var ieVersionNum = parseInt(groups[1], 10)
-    var ieMajorVersion = Math.floor(ieVersionNum)
+    var ieVersionNum = parseInt(groups[1], 10) //返回整数
+    var ieMajorVersion = Math.floor(ieVersionNum)//取整数
     return ieMajorVersion
   }
 
@@ -28,10 +28,10 @@
     // @cc_on docs: https://msdn.microsoft.com/library/8ka90k2e%28v=vs.94%29.aspx
     var jscriptVersion = new Function('/*@cc_on return @_jscript_version; @*/')() // jshint ignore:line
     if (jscriptVersion === undefined) {
-      return 11 // IE11+ not in emulation mode
+      return 11 // IE11+ not in emulation mode IE11 +不在仿真模式
     }
     if (jscriptVersion < 9) {
-      return 8 // IE8 (or lower; haven't tested on IE<8)
+      return 8 // IE8 (or lower; haven't tested on IE<8)IE8（或低；没有测试IE＜8）
     }
     return jscriptVersion // IE9 or IE10 in any mode, or IE11 in non-IE11 mode
   }

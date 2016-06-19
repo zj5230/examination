@@ -23,14 +23,13 @@ if($result = mysql_fetch_array($check_query)){
 } else {
     exit('登录失败！点击此处 <a href="javascript:history.back(-1);">返回</a> 重试');
 }
-
-switch($result!=0)
+switch($_SESSION['userid'])
 	{
 		case 1:
 		header("Location:administrators.php");
 		break;
 		case 2:
-		header("Location:administrators.php");
+		header("Location:executive_director.php");
 		break;
 	}
 

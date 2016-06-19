@@ -67,7 +67,7 @@ function showmenu(id){id.style.visibility = "visible";}
 function hidmenu(){UserList.style.visibility = "hidden";}
 document.onclick = hidmenu;
 </script>
-<div class="user"><a href="javascript:showmenu(UserList)">admin</a>
+<div class="user"><a href="javascript:showmenu(UserList)"><?php session_start();echo $_SESSION['username']; ?></a>
 <div id="UserList"><a href="">修改</a>
 <a href="">注销</a>
 <a href="">退出</a></div>
@@ -127,8 +127,59 @@ $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hi
 
 
 <!-- PageNum -->
+
+<?php
+//分页显示
+$pagesize=10;//每页记录数
+$tmpArr=mysql_fetch_array($rs);
+$numAL=mysql_num_rows($rs);//取得记录总数
+$pages=intval($numAL/$pagesize);//计算总页数
+if($numAL%$pagesize)$pages++;//设置缺省页码
+if(isset($_GET['page']))
+{
+	$page=intval($_GET['page']);
+}
+else
+{
+	$page=1;//设置第一页
+}
+$offset=$pagesize*($page-1);//计算记录偏移量
+$rs=mysql_query("select * from personnel_management limit $offset,$pagesize	",$conn);//取得当前页记录集
+$curNum=mysql_num_rows($rs);//当前页实际记录数
+while($tmpArr=mysql_fetch_array($rs))//提取一行，并循环判断
+{
+	$i=0;
+	//for($a=0;$a<$ColNum;$a++)
+?>
+<?=$tmpArr[1];//$tmpArr["news_title"];?>
+<?php echo $tmpArr[2];//$tmpArr["news_cont"]; ?>
+<?php } ?>
+<?php //翻页显示 
+echo "<p>";//align center
+$first=1;
+$prev=$page-1;
+$next=$page+1;
+$last=$pages;
+if($page>1)
+{
+	echo "<a href='?page=".$first."'>首页</a>";
+	echo "<a href='?page=".$prev."'>上一页</a>";
+}
+if($page<$pages)
+{
+	echo "<a href='?page=".$next."'>下一页</a>";
+	echo "<a href='?page=".$last."'>尾页</a>";
+}
+//翻页显示二
+echo "|共有".$pages."页(".$page."/".$pages.")";
+for ($i=1;$i<$page;$i++){echo "<a href='?page=".$i.">[".$i."']</a>";} //先输出当前页之前的
+if($page>0)echo "[".$page."]";;//再输出当前页
+for($i=$page+1;$i<=$pages;$i++){echo "<a href='?page=".$i."'>[".$i."]</a>";}//接着输出当前页之后
+echo "转到第<input maxLength=3 size=3 value=".($page+1)." name=gotox>页<input hideFocus onclick=\"location.href='?page=gotox.value';\"type=button value=Go name=cmd_goto>";
+echo "</p>";
+?>
 <ul id="PageNum">
-<li><a href="">首页</a></li>
+<li><a href="executive_director.php">首页</a></li>
 <li><a href="">上一页</a></li>
 <li><a href="">1</a></li>
 <li><a href="">2</a></li>
