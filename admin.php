@@ -31,6 +31,8 @@ switch($_SESSION['userid'])
 		case 2:
 		header("Location:executive_director.php");
 		break;
+		case 3:
+		header("Location:examination.php");
 	}
 
 
